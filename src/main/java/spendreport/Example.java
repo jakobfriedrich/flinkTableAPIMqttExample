@@ -35,8 +35,8 @@ public class Example {
         prop2.put(MQTTSourceFunction.CLIENT_ID, CLIENT_ID2);
         prop2.put(MQTTSourceFunction.TOPIC, TOPIC2);
 
-        DataStream<DeviceAction> deviceActionDataStream = env.addSource(new MQTTSourceFunction(prop1, DeviceAction.class)).returns(DeviceAction.class);
-        DataStream<Device> deviceDataStream = env.addSource(new MQTTSourceFunction(prop2, Device.class)).returns(Device.class);
+        DataStream<DeviceAction> deviceActionDataStream = env.addSource(new MQTTSourceFunction<DeviceAction>(prop1, DeviceAction.class)).returns(DeviceAction.class);
+        DataStream<Device> deviceDataStream =  env.addSource(new MQTTSourceFunction<Device>(prop2, Device.class)).returns(Device.class);
 
 
         final Schema deviceActionSchema = Schema.newBuilder()
