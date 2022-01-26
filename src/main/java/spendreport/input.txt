@@ -1,0 +1,5 @@
+{"actionid": 1, "userid": 1, "deviceid": 1, "event_name": "establishConnection" ,"event_time": "2020-01-25 15:20:00.000"}
+{"actionid": 2, "userid": 1, "deviceid": 1, "event_name": "sendError" ,"event_time": "2020-01-25 15:25:00.000"}
+{"actionid": 3, "userid": 2, "deviceid": 2, "event_name": "establishConnection" ,"event_time": "2020-01-25 15:30:00.000"}
+
+{"deviceid": 2, "name": "iotdevice", "status": "connected" ,"event_time": "2020-01-25 15:28:00.000"}
