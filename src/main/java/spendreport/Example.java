@@ -101,8 +101,30 @@ public class Example {
                 "ON L.window_start = R.window_start AND L.window_end = R.window_end AND L.deviceid = R.deviceid"
         );
 
+        Table whereFilter = tableEnv.sqlQuery("SELECT * FROM DeviceActionInputTable WHERE DeviceActionInputTable.userid = 1");
 
-        windowJoin.execute().print();
+        Table havingFilter = tableEnv.sqlQuery("SELECT deviceid, COUNT(*) as numberOfResultsForDevice FROM DeviceActionInputTable GROUP BY DeviceActionInputTable.deviceid HAVING DeviceActionInputTable.deviceid > 1");
+
+        Table topNFilter = tableEnv.sqlQuery("SELECT * FROM (" +
+                " SELECT *, ROW_NUMBER() OVER (ORDER BY rowtime DESC) AS rownum FROM DeviceActionInputTable) "+
+                " WHERE rownum <= 2");
+
+        Table patternRecognition = tableEnv.sqlQuery("SELECT T.aid, T.bid FROM DeviceActionInputTable " +
+                " MATCH_RECOGNIZE ( " +
+                        "PARTITION BY userid " +
+                        "ORDER BY rowtime "+
+                        "MEASURES "+
+                            "A.deviceid AS aid, "+
+                            "B.deviceid AS bid "+
+                        "ONE ROW PER MATCH "+
+                        "PATTERN (A B) "+
+                        "DEFINE " +
+                            "A AS deviceid = 1, "+
+                            "B AS deviceid = 2 "+
+                        ") AS T"
+);
+
+        patternRecognition.execute().print();
         env.execute("Window WordCount");
 
     }
