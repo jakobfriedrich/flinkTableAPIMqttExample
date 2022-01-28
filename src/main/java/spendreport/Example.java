@@ -236,7 +236,6 @@ public class Example {
                 .watermark("rowtime", "rowtime")
                 .build();
         Table deviceActionInputTable = tableEnv.fromDataStream(deviceActionDataStream, deviceActionSchema);
-        deviceActionInputTable.printSchema();
         tableEnv.createTemporaryView("DeviceActionInputTable", deviceActionInputTable);
 
         final Schema deviceSchema = Schema.newBuilder()
@@ -247,7 +246,6 @@ public class Example {
                 .watermark("rowtime", "rowtime")
                 .build();
         Table deviceInputTable = tableEnv.fromDataStream(deviceDataStream, deviceSchema);
-        deviceInputTable.printSchema();
         tableEnv.createTemporaryView("DeviceInputTable", deviceInputTable);
         return tableEnv;
     }

@@ -1,17 +1,11 @@
 package spendreport;
 
-import org.apache.flink.calcite.shaded.com.fasterxml.jackson.databind.JsonNode;
 import org.apache.flink.calcite.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.flink.calcite.shaded.com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
-import org.apache.flink.types.Row;
 import org.eclipse.paho.client.mqttv3.*;
-import scala.util.parsing.json.JSON;
 
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 public class MQTTSourceFunction<T> implements SourceFunction<T> {
