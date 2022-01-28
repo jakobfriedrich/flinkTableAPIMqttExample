@@ -1,0 +1,3 @@
+{"deviceid": 2, "name": "iotdevice2", "status": "connected" ,"event_time": "2020-01-25 15:28:00.000"}
+{"deviceid": 1, "name": "iotdevice", "status": "connected" ,"event_time": "2020-01-25 15:20:00.000"}
+{"deviceid": 2, "name": "iotdevice2", "status": "disconnected" ,"event_time": "2020-01-25 15:40:00.000"}

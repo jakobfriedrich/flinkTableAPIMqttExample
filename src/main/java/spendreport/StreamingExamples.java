@@ -24,7 +24,7 @@ public class StreamingExamples {
                 "  `proctime` AS PROCTIME()   \n" +
                 ") WITH (\n" +
                 "  'connector' = 'filesystem',\n" +
-                "  'path' = 'C:\\Users\\jakob\\flink\\flink-1.14.3\\frauddetection\\src\\main\\java\\spendreport\\input.txt',\n" +
+                "  'path' = 'C:\\Users\\jakob\\flink\\flink-1.14.3\\frauddetection\\src\\main\\java\\spendreport\\deviceActionInput.txt',\n" +
                 "  'format' = 'json', \n" +
                 "  'json.fail-on-missing-field' = 'true'\n" +
                 ")");
