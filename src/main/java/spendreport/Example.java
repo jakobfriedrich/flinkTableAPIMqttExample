@@ -42,31 +42,31 @@ public class Example {
         }
 
         //selects event_name column from incoming events at DeviceActionInputTable
-        Table projection = tableEnv.sqlQuery("SELECT event_name From DeviceActionInputTable");
+        Table projection = tableEnv.sqlQuery("SELECT event_name FROM DeviceActionInputTable");
         //calculates number of events at DeviceActionInputTable for each 10 minute size tumbling window
-        Table tumblingWindow = tableEnv.sqlQuery("Select window_start, window_end, COUNT(actionid) AS number_of_results "+
+        Table tumblingWindow = tableEnv.sqlQuery("SELECT window_start, window_end, COUNT(*) AS number_of_results "+
                 "FROM TABLE(TUMBLE(TABLE DeviceActionInputTable, DESCRIPTOR(rowtime), INTERVAL '10' MINUTES))" +
                 "GROUP BY window_start, window_end"
         );
         //calculates number of events at DeviceActionInputTable for each 10 minute size 5 minute slide hopping  window
-        Table hoppingWindow = tableEnv.sqlQuery("Select window_start, window_end, COUNT(actionid) AS number_of_results "+
+        Table hoppingWindow = tableEnv.sqlQuery("SELECT window_start, window_end, COUNT(*) AS number_of_results "+
                 "FROM TABLE(HOP(TABLE DeviceActionInputTable, DESCRIPTOR(rowtime), INTERVAL '5' MINUTES, INTERVAL '10' MINUTES))" +
                 "GROUP BY window_start, window_end"
         );
         //calculates number of events at DeviceActionInputTable for each 10 minute size 2 minute step cumulate window
-        Table cumulateWindow = tableEnv.sqlQuery("Select window_start, window_end, COUNT(actionid) AS number_of_results "+
+        Table cumulateWindow = tableEnv.sqlQuery("SELECT window_start, window_end, COUNT(*) AS number_of_results "+
                 "FROM TABLE(CUMULATE(TABLE DeviceActionInputTable, DESCRIPTOR(rowtime), INTERVAL '2' MINUTES, INTERVAL '10' MINUTES))" +
                 "GROUP BY window_start, window_end"
         );
         //calculates the number of events at DeviceActionInputTable for every user
-        Table groupAggregation = tableEnv.sqlQuery("select Count(*) as number_of_results_per_user, userid From DeviceActionInputTable group by userid");
+        Table groupAggregation = tableEnv.sqlQuery("SELECT COUNT(*) as number_of_results_per_user, userid FROM DeviceActionInputTable GROUP BY userid");
         //calculates the number of events at DeviceActionInputTable for every tumbling window
-        Table windowAggregation = tableEnv.sqlQuery("Select window_start, window_end, COUNT(*) AS number_of_results "+
+        Table windowAggregation = tableEnv.sqlQuery("SELECT window_start, window_end, COUNT(*) AS number_of_results "+
                 "FROM TABLE(TUMBLE(TABLE DeviceActionInputTable, DESCRIPTOR(rowtime), INTERVAL '10' MINUTES))" +
                 "GROUP BY window_start, window_end"
         );
         //calculates the number of events at DeviceActionInputTable over every deviceid
-        Table overAggregation = tableEnv.sqlQuery(" Select actionid, userid, deviceid, event_name, COUNT(*) "+
+        Table overAggregation = tableEnv.sqlQuery("SELECT actionid, userid, deviceid, event_name, COUNT(*) "+
                 "OVER (PARTITION BY deviceid ORDER BY rowtime) AS number_of_results_per_device " +
                 "FROM DeviceActionInputTable"
         );
