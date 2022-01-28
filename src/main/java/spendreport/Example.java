@@ -124,7 +124,7 @@ public class Example {
                         ") AS T"
 );
 
-        patternRecognition.execute().print();
+        projection.execute().print();
         env.execute("Window WordCount");
 
     }
