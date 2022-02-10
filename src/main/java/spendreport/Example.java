@@ -71,7 +71,7 @@ public class Example {
                 "FROM DeviceActionInputTable"
         );
         //inner joins events at DeviceActionInputTable and DeviceInputTable over deviceid
-        Table regularJoin = tableEnv.sqlQuery("SELECT da.deviceid, da.event_name, da.event_time as action_time, d.name, d.status, d.event_time as device_status_time FROM DeviceActionInputTable as da " +
+        Table regularJoin = tableEnv.sqlQuery("SELECT da.deviceid, da.event_name, da.rowtime as action_time, d.name, d.status, d.rowtime as device_status_time FROM DeviceActionInputTable as da " +
                "INNER JOIN DeviceInputTable as d "+
                 "ON da.deviceid = d.deviceid"
         );
